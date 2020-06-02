@@ -151,7 +151,11 @@
     <%- include('submission', {submission: submission, submissionCount: submissions.length, submissionIdx: submissions.length - idx, submissionHtml: submissionHtmls[idx]}); %>
   <% }); %>
   <% } %>
-
+  
   <%- include('externalGradingLiveUpdate'); %>
+  
+  <% if (isGroupWork) { %>
+  <%-      include('chatbox', {assessment_instance_id: assessment_instance_id}); %>
+  <%}   %>
 
 </div>
