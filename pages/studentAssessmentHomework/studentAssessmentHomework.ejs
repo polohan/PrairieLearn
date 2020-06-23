@@ -47,6 +47,7 @@
                 </div>
             </div>
           </div>
+          <%- include('../partials/chatbox', {assessment_instance_id: 'public' + assessment.id}); %>
           <% } else {%>
             <div class="container-fluid">
               <div class="row">
@@ -84,6 +85,7 @@
               * Minimum group size is <%= minsize %>. You need at least <%= needsize %> more group member(s) to start.
            </p>
            <% } %>
+           <%- include('../partials/chatbox', {assessment_instance_id: 'public' + assessment.id}); %>
         <% } %>
         </div>
       </div>

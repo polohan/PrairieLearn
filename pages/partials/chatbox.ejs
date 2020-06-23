@@ -261,8 +261,9 @@
       }
       var socket;
       $(function () {
-        var assessment_instance_id = <%= assessment_instance_id%>;
+        var assessment_instance_id = "<%= assessment_instance_id%>";
         var name = document.getElementById("navbarDropdown").text;
+        var last_message_sender = "";
         socket = io("/chat", {query: "name="+ name + "&id=" + assessment_instance_id.toString()});
 
         socket.on("connect", function () {
@@ -285,7 +286,14 @@
         });
 
         socket.on("boardcast", function (msg) {
-          var full_msg = msg.username + ": " + msg.message;
+          if (last_message_sender == "" || last_message_sender != msg.username) {
+            var full_msg = msg.username + ": " + msg.message;
+            last_message_sender = msg.username;
+          } else {
+            var full_msg = msg.message;
+            local_message_count += 1;
+          }
+          
           var div_id = msg.id.toString();
           $("#messages").append($("<div id=" + div_id + ">"));
           if (local_message_count % 2 == 0) {
